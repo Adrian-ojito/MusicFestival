@@ -1,0 +1,37 @@
+@use "../base/variables" as v;
+.contacto{  
+    border-bottom: v.$blanco 2px solid ;
+    padding-bottom: 6rem;
+    margin-top: 5rem;
+    width: 120rem;
+
+    &-links{
+        flex-direction: column;
+        gap: 3rem;
+        width: 50rem;
+    }
+
+    &-link{
+        gap: 3rem;
+        span{
+            background-color:v.$negro ;
+            border: 1px solid v.$rojo;
+            padding: 1.5rem;
+            color: v.$rojo;
+        }
+        p{
+            background-color: v.$rojo;
+            padding: 1.5rem;
+        }
+    }
+
+    &-texto{
+        flex: 0 0 60%;
+        margin: auto 0;
+        h2{
+            font-size: 6rem;
+            font-weight: 400;
+            margin-bottom: 3rem;
+        }
+    }
+}

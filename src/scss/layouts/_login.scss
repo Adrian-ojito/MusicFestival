@@ -1,0 +1,110 @@
+@use "../base/variables" as v;
+@use "../base/mixins" as m;
+
+.login {
+    @include m.tablet {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        grid-template-rows: auto 1fr auto;
+    }
+
+
+    &__logo {
+        width: 5rem;
+        margin-bottom: 5rem;
+
+        img {
+            width: 15rem;
+        }
+    }
+
+    &__card {
+        max-width: 50rem;
+        margin: 0 1rem;
+        @include m.tablet{
+            width: 50rem;
+            margin: 0 auto;
+            display: block;
+        }
+        border: 2px solid v.$rojo;
+        border-radius: 2rem;
+        padding: 3.5rem;
+        height: fit-content;
+
+        h2 {
+            margin-bottom: 1rem;
+            font-size: 4rem;
+            font-family: v.$fuente-secundaria;
+        }
+
+        p {
+            margin-bottom: 3rem;
+        }
+    }
+
+    &__form {
+        padding-bottom: 1rem;
+        border-bottom: 2px solid v.$blanco;
+
+        label {
+            color: v.$blanco;
+            text-transform: uppercase;
+            margin-bottom: 0.5rem;
+        }
+
+        input {
+            margin-bottom: 2rem;
+            background-color: v.$plomo;
+            border: none;
+            padding: 1.5rem 2rem;
+            border-radius: 1rem;
+            color: v.$blanco;
+
+            &:last-child {
+                background-color: v.$rojo;
+                color: v.$blanco;
+                font-size: 2rem;
+                text-transform: uppercase;
+            }
+        }
+    }
+
+    &__fieldset {
+        border: none;
+        padding: 0;
+        flex-direction: column;
+
+    }
+
+    &--imagen {
+        grid-column: 2;
+        grid-row: 1/4;
+        height: 80rem;
+        display: none;
+
+        @include m.tablet {
+            display: unset;
+        }
+    }
+
+    &__crear-cuenta {
+        gap: 1.5rem;
+        padding: 2rem;
+        padding-bottom: 0;
+        align-items: center;
+
+        span {
+            font-size: 4rem;
+        }
+
+        a {
+            text-decoration: none;
+            text-align: center;
+        }
+    }
+
+    &__derechos {
+        width: 50rem;
+        text-align: center;
+    }
+}

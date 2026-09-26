@@ -1,0 +1,94 @@
+@use "../base/variables" as v;
+@use "../base/mixins" as m;
+
+.nosotros {
+    gap: 10rem;
+    align-items: flex-start;
+    display: inline;
+
+    @include m.tablet {
+        display: flex;
+    }
+
+    &-texto {
+        flex: 0 0 60%;
+        margin: 0 2rem;
+
+        @include m.tablet {
+            margin-left: 2rem;
+        }
+
+
+        h3 {
+            color: v.$rojo;
+            font-size: 2rem;
+            font-family: v.$fuente-secundaria;
+            margin: 5rem 0 2rem 0;
+
+            @include m.tablet {
+                margin: 5rem 0;
+                font-size: 5rem;
+            }
+        }
+
+        h2 {
+            font-family: v.$fuente-principal;
+            font-weight: 400;
+            font-size: 3rem;
+            margin-bottom: 5rem;
+
+            text-transform: uppercase;
+
+            span {
+                display: block;
+            }
+
+            @include m.tablet {
+                font-size: 5rem;
+                letter-spacing: 0.5rem;
+            }
+        }
+
+        p {
+            margin: 4rem 0;
+
+            span {
+                display: block;
+            }
+        }
+    }
+
+    &-imagen {
+        padding: 12rem;
+        flex: 0 0 40%;
+        background-color: v.$rojo;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 3rem;
+        display: none;
+
+        @include m.tablet {
+            margin-top: 0;
+            display: unset;
+        }
+    }
+
+    &-imagen1 {
+        padding: 2rem;
+        flex: 0 0 60%;
+        background-color: v.$rojo;
+        display: flex;
+        margin-top: 3rem;
+
+        @include m.tablet {
+            display: none;
+            padding: 6rem;
+        }
+
+    }
+
+    img {
+        width: 40rem;
+    }
+}

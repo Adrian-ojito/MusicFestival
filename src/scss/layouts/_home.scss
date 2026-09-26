@@ -1,0 +1,304 @@
+@use "../base/variables" as v;
+@use "../base/mixins" as m;
+
+.contenido {
+    gap: 5rem;
+    width: 150rem;
+    margin: 0 auto;
+    z-index: 5;
+    display: inline;
+
+    @include m.tablet {
+        display: flex;
+    }
+}
+
+.contenido-texto {
+
+    gap: 3rem;
+    flex-direction: column;
+
+    &--titulo {
+        display: block;
+        font-size: 8rem;
+        text-transform: uppercase;
+        color: v.$rojo;
+        margin: 1rem 0;
+        text-align: center;
+
+        @include m.tablet {
+            text-align: unset;
+        }
+
+        span {
+            @include m.tablet {
+                margin-left: 4rem;
+            }
+
+            color: v.$blanco;
+            display: block;
+        }
+    }
+
+    &--subtitulo {
+        font-size: 3rem;
+        color: v.$rojo;
+        text-align: center;
+
+        @include m.tablet {
+            text-align: unset;
+        }
+    }
+
+    &--botones {
+        justify-content: center;
+
+        @include m.tablet {
+            justify-content: start;
+        }
+
+        gap: 3rem;
+    }
+
+    &--imagen {
+        margin: 0 2rem;
+
+        @include m.tablet {
+            margin: 0;
+        }
+    }
+
+}
+
+.contenido-artistas {
+    position: relative;
+    width: 700px;
+    height: 500px;
+    display: none;
+
+    @include m.tablet {
+        display: unset;
+    }
+
+
+    .artista_ {
+        position: absolute;
+        bottom: 0;
+        transition: transform 0.35s ease;
+        cursor: pointer;
+
+        &:hover {
+            transform: scale(1.20);
+        }
+    }
+}
+
+// ==============================
+// Posiciones + clip-path individuales
+// (ajusta left/bottom/height a tu gusto, el clip-path no depende de eso)
+// ==============================
+.taylor {
+    left: 160px;
+    height: 500;
+    top: 35px;
+    z-index: 1;
+    clip-path: polygon(29.41% 10.97%, 17.89% 17.18%, 16.42% 21.44%, 22.06% 29.95%, 18.87% 34.86%, 23.04% 37.15%, 22.79% 39.28%, 25.0% 40.43%, 24.02% 42.23%, 26.47% 43.54%, 25.98% 45.83%, 27.7% 48.61%, 28.19% 47.46%, 29.17% 47.79%, 29.17% 50.08%, 30.64% 50.41%, 33.58% 55.16%, 34.8% 60.07%, 33.82% 64.65%, 31.62% 66.28%, 34.07% 65.47%, 29.66% 69.07%, 34.07% 66.61%, 32.84% 67.59%, 34.07% 67.43%, 34.8% 69.39%, 25.25% 77.41%, 23.28% 81.67%, 24.02% 85.43%, 29.41% 93.78%, 30.39% 99.51%, 87.75% 99.84%, 93.14% 78.89%, 92.89% 69.56%, 95.59% 70.7%, 96.32% 72.34%, 96.32% 70.7%, 99.75% 73.16%, 97.3% 67.92%, 99.02% 67.59%, 98.04% 65.63%, 92.65% 61.54%, 91.67% 56.63%, 80.15% 37.15%, 78.92% 33.55%, 80.64% 34.37%, 78.92% 31.1%, 80.88% 32.9%, 79.9% 30.77%, 81.37% 31.42%, 78.19% 28.97%, 75.49% 25.2%, 76.72% 24.39%, 75.0% 24.06%, 70.59% 19.31%, 67.4% 14.08%, 59.07% 9.17%, 55.64% 8.18%, 45.1% 8.18%);
+}
+
+.theweekend {
+    left: 400px;
+    height: 440;
+    width: 450px;
+    top: -60px;
+    z-index: 0;
+    clip-path: polygon(60.0% 13.31%, 57.78% 14.29%, 54.57% 12.99%, 44.44% 12.18%, 33.09% 13.64%, 33.58% 14.77%, 27.65% 16.07%, 26.67% 18.67%, 22.47% 21.1%, 23.46% 21.75%, 21.98% 22.73%, 21.48% 27.44%, 9.63% 30.68%, 2.96% 30.19%, 0.0% 32.79%, 0.0% 99.84%, 38.52% 99.84%, 40.74% 88.8%, 51.85% 92.05%, 57.04% 91.72%, 62.22% 84.74%, 65.43% 73.05%, 74.07% 69.64%, 78.27% 70.13%, 88.64% 65.91%, 90.86% 61.85%, 88.64% 58.28%, 95.56% 53.41%, 96.3% 50.49%, 92.59% 48.7%, 86.67% 49.35%, 81.73% 51.79%, 75.31% 51.3%, 72.1% 58.28%, 72.59% 60.55%, 62.47% 62.66%, 63.46% 66.07%, 58.77% 66.07%, 50.86% 63.8%, 52.35% 58.77%, 56.79% 56.01%, 61.23% 50.16%, 60.74% 47.24%, 58.52% 46.1%, 58.52% 42.53%, 54.07% 41.56%, 58.52% 39.12%, 57.04% 37.5%, 59.75% 36.04%, 58.27% 31.98%, 60.49% 30.36%, 60.49% 25.49%, 62.22% 24.51%, 62.96% 18.02%);
+}
+
+.aurora {
+    left: 310px;
+    height: 400px;
+    top: 250px;
+    z-index: 3;
+    clip-path: polygon(47.63% 1.3%, 43.97% 2.23%, 41.38% 5.4%, 39.44% 18.81%, 32.54% 24.95%, 29.53% 35.38%, 27.59% 29.98%, 30.17% 22.72%, 26.29% 25.7%, 21.55% 19.37%, 22.41% 24.21%, 18.32% 19.74%, 16.59% 21.79%, 19.4% 25.7%, 15.3% 24.39%, 22.41% 30.73%, 24.14% 35.2%, 19.18% 54.0%, 21.55% 58.66%, 20.04% 69.83%, 23.28% 73.37%, 28.23% 50.84%, 31.9% 47.3%, 36.64% 35.57%, 38.36% 44.88%, 34.48% 50.28%, 31.03% 61.82%, 26.72% 98.51%, 67.67% 98.32%, 64.44% 59.22%, 59.91% 46.0%, 62.72% 34.26%, 69.83% 50.84%, 71.98% 74.67%, 75.22% 70.2%, 76.94% 52.89%, 74.57% 30.73%, 77.37% 26.26%, 82.33% 23.09%, 78.66% 22.72%, 81.68% 19.37%, 77.37% 20.67%, 79.31% 16.95%, 75.0% 21.6%, 76.08% 17.32%, 72.41% 22.35%, 68.97% 19.55%, 68.97% 25.7%, 58.62% 21.04%, 55.6% 6.52%, 52.8% 2.98%);
+}
+
+.edsheeram {
+    left: -25px;
+    height: 350px;
+    top: 300px;
+    z-index: 3;
+    bottom: 0px;
+    clip-path: polygon(60.42% 6.16%, 57.82% 6.16%, 57.0% 4.68%, 56.51% 5.42%, 53.75% 4.68%, 53.58% 5.91%, 52.44% 5.67%, 52.28% 7.39%, 50.81% 6.9%, 50.81% 9.36%, 48.86% 9.61%, 49.35% 17.98%, 48.37% 18.47%, 48.7% 22.66%, 41.21% 24.88%, 39.9% 26.11%, 39.9% 26.85%, 44.14% 27.09%, 44.3% 28.33%, 42.35% 30.05%, 42.67% 32.76%, 40.72% 36.95%, 39.74% 37.44%, 39.41% 27.83%, 38.93% 40.39%, 34.69% 49.01%, 31.27% 50.0%, 28.83% 48.03%, 28.83% 45.07%, 27.69% 45.07%, 27.36% 44.09%, 25.41% 44.83%, 25.08% 43.84%, 23.45% 43.35%, 21.66% 43.84%, 20.2% 46.8%, 20.36% 48.77%, 21.5% 49.51%, 20.52% 51.23%, 20.85% 52.22%, 22.64% 50.0%, 23.13% 51.97%, 24.43% 50.99%, 27.69% 51.97%, 29.32% 53.69%, 29.8% 58.37%, 27.85% 63.55%, 28.83% 64.04%, 31.11% 58.87%, 32.9% 60.1%, 34.2% 92.12%, 33.06% 94.83%, 33.06% 97.29%, 31.11% 99.75%, 71.5% 99.75%, 70.68% 88.18%, 71.66% 87.68%, 75.57% 90.64%, 71.82% 86.21%, 71.99% 84.73%, 73.94% 82.02%, 73.62% 75.37%, 72.15% 68.72%, 77.69% 63.3%, 77.36% 54.19%, 73.13% 41.13%, 69.54% 34.24%, 63.36% 31.53%, 64.66% 26.11%, 64.17% 24.88%, 64.5% 16.26%);
+}
+
+.brunomars {
+    left: 485px;
+    height: 600px;
+    top: 45px;
+    z-index: 3;
+    clip-path: polygon(56.81% 30.56%, 54.04% 30.56%, 53.58% 31.08%, 51.27% 30.73%, 46.88% 32.12%, 42.73% 34.2%, 42.73% 35.07%, 41.34% 35.42%, 41.11% 36.46%, 39.26% 37.5%, 38.57% 39.41%, 38.8% 43.92%, 38.11% 47.4%, 39.49% 50.52%, 33.03% 52.6%, 32.1% 54.51%, 24.48% 56.6%, 23.33% 57.47%, 21.94% 71.18%, 19.86% 80.03%, 16.17% 88.54%, 13.63% 99.83%, 21.94% 99.83%, 22.63% 98.44%, 23.79% 98.61%, 23.56% 99.83%, 67.21% 99.83%, 70.67% 98.09%, 63.51% 80.03%, 64.9% 70.31%, 68.36% 69.62%, 70.44% 67.88%, 71.36% 65.45%, 70.67% 62.85%, 71.36% 59.55%, 70.9% 57.12%, 65.59% 49.13%, 66.74% 45.49%, 68.59% 43.58%, 67.9% 42.71%, 61.66% 41.84%, 61.66% 40.28%, 63.28% 39.58%, 63.05% 36.46%, 60.97% 32.81%, 59.12% 32.81%);
+}
+
+body.modal-abierto {
+    overflow: hidden;
+}
+
+.overlay-artista {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(6px);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.overlay-artista.activo {
+    display: flex;
+}
+
+// modal
+
+body.modal-abierto {
+    overflow: hidden;
+}
+
+.overlay-artista {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(6px);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.overlay-artista.activo {
+    display: flex;
+}
+
+.modal-artista {
+    background: #141414;
+    border-radius: 1.6rem;
+    padding: 3rem 4rem;
+    max-width: 48rem;
+    width: 90%;
+    position: relative;
+    box-shadow: 0 2rem 6rem rgba(0, 0, 0, 0.5);
+    color: #fff;
+
+    &__cerrar {
+        position: absolute;
+        top: 2rem;
+        right: 2rem;
+        background: none;
+        border: none;
+        font-size: 2.6rem;
+        line-height: 1;
+        cursor: pointer;
+        color: #999;
+        transition: color 0.2s ease;
+
+        &:hover {
+            color: #fff;
+        }
+    }
+
+    &__genero {
+        color: v.$rojo;
+        font-size: 1.3rem;
+        font-weight: 700;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        margin-bottom: 1.2rem;
+    }
+
+    &__nombre {
+        font-size: 3.2rem;
+        font-weight: 700;
+        margin-bottom: 2rem;
+        font-family: serif;
+        /* quita esta línea si tu título usa otra tipografía */
+    }
+
+    &__info {
+        font-size: 1.6rem;
+        color: #ccc;
+        line-height: 1.6;
+        margin-bottom: 3rem;
+    }
+
+    &__linea {
+        border: none;
+        border-top: 1px solid #333;
+        margin-bottom: 3rem;
+    }
+
+    &__boton {
+        display: inline-block;
+        background: v.$rojo;
+        color: #fff;
+        text-decoration: none;
+        text-transform: uppercase;
+        font-weight: 700;
+        font-size: 1.4rem;
+        letter-spacing: 0.05em;
+        padding: 1.5rem 3rem;
+        border-radius: 4rem;
+        transition: filter 0.2s ease;
+
+        &:hover {
+            filter: brightness(1.15);
+        }
+    }
+}
+
+.contenido-artistas .artista_ {
+    cursor: pointer;
+}
+
+/* --- el contenedor con scroll propio --- */
+.artists {
+    margin-top: 3rem;
+    display: flex;
+    gap: 12px;
+    overflow-x: auto;
+    /* <- esto es lo que le da su propio scroll */
+    padding: 0 20px 12px;
+    scroll-snap-type: x mandatory;
+    /* hace que "encaje" en cada tarjeta */
+    -webkit-overflow-scrolling: touch;
+    /* scroll suave en iOS */
+    @include m.tablet{
+        display: none;
+    }
+}
+
+/* opcional: ocultar la barra de scroll fea */
+.artists::-webkit-scrollbar {
+    height: 0;
+}
+
+.artists {
+    scrollbar-width: none;
+}
+
+.artist {
+    display: flex;
+    flex-direction: column ;
+    align-items: center;
+    img{
+        width:fit-content;
+    }
+    /* ancho fijo de cada tarjeta (no se achica) */
+    scroll-snap-align: start;
+    /* cada tarjeta "engancha" al hacer scroll */
+    border-radius: 4px;
+    background: linear-gradient(160deg, #2a2a2a, #080808);
+    display: flex;
+    color: #8a8a8a;
+    font-size: 13px;
+}
+

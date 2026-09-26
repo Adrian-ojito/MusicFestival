@@ -1,0 +1,44 @@
+@use "variables" as v;
+
+.flex {
+    display: flex;
+}
+
+.centrar {
+    margin: 0 auto;
+}
+
+.alerta {
+    color: v.$blanco;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    text-align: center;
+
+    p {
+        margin: 0;
+
+    }
+}
+
+.error {
+    background-color: v.$rojo ;
+
+}
+
+.exito {
+    background-color: v.$plomo;
+}
+
+
+.contenido,
+.nosotros,
+.entradas {
+    min-height: 100vh;
+    /* cada sección ocupa toda la pantalla */
+    scroll-snap-align: start;
+    /* 👈 le dice a cada sección "engánchate aquí" */
+
+}
+.servicios{
+    scroll-snap-align: start;
+}

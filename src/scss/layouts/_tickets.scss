@@ -1,0 +1,574 @@
+
+@use "../base/variables" as v;
+
+.borde {
+    border: .1rem solid v.$rojo-oscuro;
+}
+
+.puntero {
+    cursor: pointer;
+}
+
+.border{
+    border: 1px solid v.$blanco;
+    background-color: purple;
+}
+
+// ==========================================================================
+// Componentes
+// ==========================================================================
+
+.compra {
+    padding-bottom: 14rem;
+
+    &__volver {
+        background: none;
+        border: none;
+        color: v.$blanco;
+        padding: .4rem;
+        margin-bottom: 4rem;
+
+        svg {
+            display: block;
+        }
+    }
+
+    &__aviso {
+        display: inline-block;
+        background: rgba(v.$rojo, .12);
+        color: v.$rojo;
+        font-size: 1.2rem;
+        letter-spacing: .06em;
+        text-transform: uppercase;
+        padding: 1.2rem 2rem;
+        margin-bottom: 4.8rem;
+    }
+}
+
+.stepper {
+    gap: 4rem;
+    margin-bottom: 5.6rem;
+    
+
+    &__paso {
+        gap: 1.4rem;
+        flex: 1;
+        min-width: 0;
+        align-items: center;
+
+        &-activo {
+            .stepper__circulo {
+                background: v.$rojo;
+                border-color: v.$rojo;
+                color: v.$blanco;
+            }
+
+            .stepper__texto {
+                color: v.$blanco;
+                border-bottom: .1rem solid v.$rojo;
+                padding-bottom: .6rem;
+            }
+        }
+
+        &.completo {
+            .stepper__circulo {
+                background: transparent;
+                border-color: v.$rojo;
+                color: v.$rojo;
+            }
+        }
+    }
+
+    &__circulo {
+        width: 3.4rem;
+        height: 3.4rem;
+        border-radius: 50%;
+        border: .1rem solid v.$plomo;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.36rem;
+        color: v.$blanco;
+        flex-shrink: 0;
+        transition: background .2s ease, border-color .2s ease, color .2s ease;
+    }
+
+    &__texto {
+        font-size: 1.28rem;
+        letter-spacing: .08em;
+        text-transform: uppercase;
+        color: v.$blanco;
+        white-space: nowrap;
+    }
+
+    &__linea {
+        flex: 1;
+        height: 1px;
+        background: v.$plomo;
+        margin-top: 1.7rem;
+    }
+}
+
+.mapa {
+    display: grid;
+    grid-template-columns: 1fr 26rem;
+    gap: 6rem;
+    align-items: start;
+    
+    &__todo{
+        align-items: center;
+        flex-direction: column;
+    }
+
+    &__escenario {
+        display: inline-block;
+        background: v.$blanco;
+        color: v.$negro;
+        font-weight: 900;
+        font-size: 1.76rem;
+        letter-spacing: .06em;
+        padding: 1.6rem 4.8rem;
+        margin-bottom: 4rem;
+    }
+
+    &__zonas {
+        flex-direction: column;
+        gap: .8rem;
+        align-items: center;
+    }
+
+    &__fila {
+        gap: .8rem;
+    }
+
+    &__espaciador {
+        height: 2.4rem;
+    }
+}
+
+.zona-grupo {
+    position: relative;
+    flex-shrink: 0; // evita que el flex-parent la achique
+
+    > .zona__accesible {
+        position: absolute;
+        top: .6rem;
+        left: .6rem;
+        background: v.$negro;
+        width: 2rem;
+        height: 2rem;
+        border-radius: .3rem;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.12rem;
+        z-index: 2;
+        pointer-events: none;
+    }
+
+    // width + min-width + flex-basis juntos: si algo más pisa una,
+    // las otras dos sostienen el ancho igual.
+    &--ala {
+        width: 8.8rem;
+        min-width: 8.8rem;
+        flex: 0 0 8.8rem;
+
+        .zona__mitad:first-child {
+            border-top-left-radius: .4rem;
+            border-top-right-radius: .4rem;
+        }
+    }
+
+    &--centro {
+        width: 24rem;
+        min-width: 24rem;
+        flex: 0 0 24rem;
+    }
+
+    &--menor {
+        width: 15rem;
+        min-width: 15rem;
+        flex: 0 0 15rem;
+    }
+
+    &--izq {
+        .zona__mitad:last-child {
+            clip-path: polygon(0 0, 100% 0, 100% 100%, 30% 100%, 30% 75%, 0 75%);
+        }
+    }
+}
+
+.zona {
+    display: block; // por si el reset del proyecto cambia el display por defecto
+    width: 100%;
+    transition: border-color .15s ease, filter .15s ease;
+
+    &:hover {
+        filter: brightness(1.15);
+    }
+
+    &.seleccionada {
+        border-color: v.$blanco;
+    }
+
+    &__golden {
+        background: v.$rojo;
+    }
+
+    &__vip {
+        background: v.$rojo-oscuro;
+    }
+
+    &__general {
+        background: v.$plomo;
+    }
+
+    &__mitad {
+        height: 6.8rem;
+    }
+}
+
+.leyenda {
+    flex-direction: column;
+    gap: 1.2rem;
+    padding-top: 9.6rem;
+
+    &__item {
+        align-items: flex-start;
+        gap: 1.2rem;
+        padding: 1.2rem;
+        margin: 0;
+        border-radius: .3rem;
+        background: none;
+        text-align: left;
+        font-family: inherit;
+        transition: background .15s ease, border-color .15s ease;
+        width: 100%;
+
+        &:hover {
+            border-color: v.$blanco;
+        }
+
+        &.activa {
+            background: v.$plomo;
+            border-color: v.$rojo;
+        }
+    }
+
+    &__punto {
+        width: 1.2rem;
+        height: 1.2rem;
+        border-radius: 50%;
+        margin-top: .4rem;
+        flex-shrink: 0;
+    }
+
+    &__nombre {
+        font-size: 1.25rem;
+        letter-spacing: .05em;
+        text-transform: uppercase;
+        color: v.$blanco;
+    }
+
+    &__precio {
+        font-size: 1.36rem;
+        color: v.$blanco;
+        margin-top: .3rem;
+    }
+}
+
+.resumen {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: v.$plomo;
+    border-top: .1rem solid v.$plomo;
+    padding: 2.2rem 2.4rem;
+    justify-content: center;
+    transform: translateY(100%);
+    transition: transform .3s ease;
+    z-index: 10;
+
+    &.visible {
+        transform: translateY(0);
+    }
+
+    &__contenido {
+        max-width: 104rem;
+        width: 100%;
+        align-items: center;
+        justify-content: space-between;
+        gap: 2rem;
+    }
+
+    &__detalle {
+        font-size: 1.52rem;
+    }
+
+    &__zona {
+        font-weight: 600;
+        font-size: 1.84rem;
+    }
+
+    &__precio {
+        color: v.$rojo;
+        font-weight: 600;
+    }
+}
+
+.boton {
+    background: v.$rojo;
+    color: v.$blanco;
+    border: none;
+    font-size: 1.36rem;
+    font-weight: 600;
+    letter-spacing: .03em;
+    padding: 1.4rem 3.2rem;
+    transition: background .15s ease;
+    flex-shrink: 0;
+
+    &:hover {
+        background: v.$rojo;
+    }
+
+    &:disabled {
+        background: v.$plomo;
+        color: v.$blanco;
+        cursor: not-allowed;
+    }
+}
+
+// Paso 2 — Datos de compra
+.paso {
+    display: none;
+
+    &.activo {
+        display: block;
+    }
+}
+
+.datos {
+    &__resumen {
+        background: v.$plomo;
+        padding: 2rem 2.4rem;
+        margin-bottom: 4rem;
+        justify-content: space-between;
+        align-items: center;
+
+        &-zona {
+            font-weight: 600;
+            font-size: 3rem;
+            color: v.$blanco;
+        }
+
+        &-precio {
+            color: v.$rojo;
+            font-size: 1.44rem;
+            margin-top: .4rem;
+        }
+    }
+
+    &__cantidad {
+        align-items: center;
+        gap: 1.4rem;
+
+        &-btn {
+            width: 4rem;
+            height: 3.2rem;
+            background: v.$rojo;
+            color: v.$blanco;
+            font-size: 1.76rem;
+            border: none;
+
+            &:hover {
+                border-color: v.$rojo;
+            }
+        }
+    }
+}
+
+.formulario {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2.4rem;
+    max-width: 64rem;
+
+    &__pie {
+        grid-column: 1 / -1;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 1.6rem;
+    }
+}
+
+.campo {
+    flex-direction: column;
+    gap: .8rem;
+
+    &--ancho {
+        grid-column: 1 / -1;
+    }
+
+    label {
+        font-size: 1.2rem;
+        letter-spacing: .05em;
+        text-transform: uppercase;
+        color: v.$blanco;
+    }
+
+    input {
+        background: v.$plomo;
+        color: v.$blanco;
+        padding: 1.2rem 1.4rem;
+        font-size: 1.52rem;
+
+        &:focus {
+            outline: none;
+            border-color: v.$rojo;
+        }
+    }
+}
+
+.total {
+    font-size: 1.44rem;
+    color: v.$blanco;
+
+    strong {
+        color: v.$blanco;
+        font-size: 2.08rem;
+        font-weight: 600;
+        margin-left: .8rem;
+    }
+}
+
+// Llena el espacio vacío al lado del formulario en "Datos de compra"
+.paso2 {
+    align-items: flex-start;
+    gap: 6rem;
+
+    &__form {
+        flex: 1;
+        min-width: 0;
+    }
+
+    &__promo {
+        width: 32rem;
+        min-width: 32rem;
+        flex-shrink: 0;
+        min-height: 48rem;
+        align-items: flex-end;
+        background: linear-gradient(160deg, v.$rojo 0%, v.$negro 75%);
+        padding: 4rem 3.2rem;
+    }
+
+    &__promo-eyebrow {
+        display: block;
+        font-size: 1.2rem;
+        letter-spacing: .08em;
+        text-transform: uppercase;
+        color: rgba(255, 255, 255, .65);
+        margin-bottom: 1.2rem;
+    }
+
+    &__promo-titulo {
+        font-size: 3.6rem;
+        font-weight: 900;
+        line-height: 1.05;
+        color: v.$blanco;
+        margin-bottom: 1.6rem;
+    }
+
+    &__promo-nota {
+        font-size: 1.3rem;
+        color: rgba(255, 255, 255, .7);
+    }
+}
+
+// Paso 3 — Confirmación
+.confirmacion {
+    text-align: center;
+    padding: 6rem 0;
+
+    &__titulo {
+        font-weight: 900;
+        font-size: 3.84rem;
+        margin-bottom: 1.6rem;
+    }
+
+    &__texto {
+        color: v.$blanco;
+        margin-bottom: 3.6rem;
+    }
+
+    &__resumen {
+        display: inline-block;
+        text-align: left;
+        background: v.$plomo;
+        padding: 2.8rem 3.6rem;
+    }
+
+    &__fila {
+        justify-content: space-between;
+        gap: 4rem;
+        padding: 1rem 0;
+        border-bottom: .1rem solid v.$plomo;
+        font-size: 1.44rem;
+
+        &:last-child {
+            border-bottom: none;
+            padding-top: 1.6rem;
+        }
+
+        span:first-child {
+            color: v.$blanco;
+        }
+    }
+}
+
+// ==========================================================================
+// Responsive
+// ==========================================================================
+
+@media (max-width: 760px) {
+    .mapa {
+        grid-template-columns: 1fr;
+    }
+
+    .leyenda {
+        flex-direction: row;
+        flex-wrap: wrap;
+        padding-top: 0;
+    }
+
+    .leyenda__item {
+        width: auto;
+        flex: 1;
+        min-width: 14rem;
+    }
+
+    .stepper__texto {
+        display: none;
+    }
+
+    .stepper {
+        gap: 1.2rem;
+    }
+
+    .formulario {
+        grid-template-columns: 1fr;
+    }
+
+    .paso2__promo {
+        display: none;
+    }
+}
+
+.confirmar{
+    cursor: pointer;
+    opacity: 0;
+    visibility: hidden;
+}
+
+.show {
+    visibility: visible;
+    opacity: 1;
+}
