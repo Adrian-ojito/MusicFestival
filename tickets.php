@@ -33,8 +33,6 @@ $precio = $datosTicket['precio'] ?? '';
 $lugar = $datosTicket['lugar'] ?? '';
 $entradas_disponibles = $datosTicket['entradas_disponibles'] ?? 0;
 
-
-
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     if (empty($_POST['nombre']) || empty($_POST['dni']) || empty($_POST['email']) || empty($_POST['telefono'])) {
         $errores[] = "Todos los campos son obligatorios";
@@ -103,7 +101,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
 <body>
 
-    <div class="compra contenedor centrar">
+    <div class="compra  centrar">
 
         <button class="compra__volver puntero <?php if ($paso == 3) {
                                                     echo "desaparecer";

@@ -61,7 +61,7 @@
     }
 
     &-image1 {
-
+        width: 100%;
         @include m.tablet {
             display: inline;
             position: relative;

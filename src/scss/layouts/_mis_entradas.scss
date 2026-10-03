@@ -1,0 +1,212 @@
+@use "../base/variables" as v;
+@use "../base/mixins" as m;
+
+.mis-entradas {
+    padding: 24px 16px 40px;
+    max-width: 120rem;
+    width: 100%;
+
+    @media (min-width: 768px) {
+        padding: 32px 32px 56px;
+    }
+
+    &__titulo {
+        font-weight: 400;
+        font-size: 42px;
+        letter-spacing: 0.04em;
+        line-height: 1;
+        text-transform: uppercase;
+
+        @media (min-width: 768px) {
+            font-size: 54px;
+        }
+    }
+
+    &__sub {
+        color: v.$plomoClaro;
+        font-size: 14px;
+        line-height: 1.5;
+        margin: 6px 0 20px;
+    }
+}
+
+.tickets {
+    flex-direction: column;
+    background: v.$negro;
+    border: 1px solid v.$plomoClaro;
+    border-radius: 10px;
+    margin-bottom: 16px;
+
+    @media (min-width: 768px) {
+        flex-direction: row;
+    }
+}
+
+.ticket {
+    padding: 18px;
+
+    @media (min-width: 768px) {
+        flex: 1;
+        padding: 20px 24px;
+    }
+
+    &__header {
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 6px;
+    }
+
+    &__zona {
+        font-size: 12px;
+        letter-spacing: 0.14em;
+        padding: 3px 10px;
+        border: 1px solid;
+        border-radius: 2px;
+
+        &--platea-golden{
+            color: #e0b04f;
+            border-color: #e0b04f;
+        }
+
+        &--platea-vip{
+            color: v.$rojo;
+            border-color: v.$rojo;
+        }
+
+        &--platea-general {
+            color: v.$plomoClaro;
+            border-color: v.$plomo;
+        }
+    }
+
+    &__estado {
+        font-size: 12px;
+        color: v.$verde;
+    }
+
+    &__titulo {
+        font-family: "Bebas Neue", sans-serif;
+        font-weight: 400;
+        font-size: 28px;
+        letter-spacing: 0.04em;
+        line-height: 1.1;
+        margin: 0 0 12px;
+    }
+
+    &__datos {
+        list-style: none;
+        flex-direction: column;
+        gap: 8px;
+        margin: 0 0 16px;
+        padding: 0;
+        font-size: 13px;
+        color: v.$plomo;
+
+        @media (min-width: 768px) {
+            flex-direction: row;
+            flex-wrap: wrap;
+            gap: 8px 20px;
+        }
+
+        p {
+            margin: 0;
+        }
+
+        small {
+            display: block;
+            font-size: 11px;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: v.$plomoClaro;
+            margin-bottom: 2px;
+        }
+
+        b {
+            font-weight: 500;
+            font-size: 18px;
+        }
+    }
+
+    &__compra {
+        gap: 28px;
+
+        small {
+            display: block;
+            font-size: 11px;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: v.$plomoClaro;
+            margin-bottom: 2px;
+        }
+
+        b {
+            font-weight: 500;
+            font-size: 18px;
+        }
+    }
+
+    &__descargar {
+        position: relative;
+        align-items: center;
+        gap: 14px;
+        padding: 16px 18px;
+        border-top: 2px dashed v.$plomo;
+
+        @media (min-width: 768px) {
+            width: 190px;
+            flex-direction: column;
+            justify-content: center;
+            border-top: 0;
+            border-left: 2px dashed #2f2f37;
+        }
+
+        &::before,
+        &::after {
+            content: "";
+            position: absolute;
+            top: -11px;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: v.$negro;
+            border: 1px solid v.$plomoClaro;
+        }
+
+        &::before {
+            left: -11px;
+        }
+
+        &::after {
+            right: -11px;
+
+            @media (min-width: 768px) {
+                top: auto;
+                right: auto;
+                bottom: -11px;
+                left: -11px;
+            }
+        }
+    }
+
+    &__qr {
+        width: 88px;
+        height: 88px;
+        border-radius: 4px;
+        background: v.$blanco;
+    }
+
+    &__info {
+        flex: 1;
+        flex-direction: column;
+        gap: 10px;
+        min-width: 0;
+
+        @media (min-width: 768px) {
+            width: 100%;
+        }
+
+        &-datos {
+            text-align: center;
+        }
+    }
+}

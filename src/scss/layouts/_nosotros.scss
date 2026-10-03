@@ -76,19 +76,25 @@
 
     &-imagen1 {
         padding: 2rem;
-        flex: 0 0 60%;
+        flex: 0 0 40%;
         background-color: v.$rojo;
         display: flex;
-        margin-top: 3rem;
+        margin-top: 10rem;
+        margin: 3rem auto 0  auto;
+        display: block;
+        text-align: center;
 
         @include m.tablet {
             display: none;
-            padding: 6rem;
+            padding: 5rem;
+            flex: 0 0 60%;
         }
-
     }
 
     img {
-        width: 40rem;
+        width: 90%;
+        @include m.tablet{
+            width: 40rem;
+        }
     }
 }

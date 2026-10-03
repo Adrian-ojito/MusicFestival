@@ -2,43 +2,20 @@
 @use "../base/mixins" as m;
 
 .contenido {
-    gap: 5rem;
-    width: 150rem;
-    margin: 0 auto;
     z-index: 5;
     display: inline;
 
+
     @include m.tablet {
         display: flex;
+        max-width: 130rem;
     }
 }
 
 .contenido-texto {
-
+    margin-bottom: 4.5rem;
     gap: 3rem;
     flex-direction: column;
-
-    &--titulo {
-        display: block;
-        font-size: 8rem;
-        text-transform: uppercase;
-        color: v.$rojo;
-        margin: 1rem 0;
-        text-align: center;
-
-        @include m.tablet {
-            text-align: unset;
-        }
-
-        span {
-            @include m.tablet {
-                margin-left: 4rem;
-            }
-
-            color: v.$blanco;
-            display: block;
-        }
-    }
 
     &--subtitulo {
         font-size: 3rem;
@@ -55,6 +32,7 @@
 
         @include m.tablet {
             justify-content: start;
+            margin-left: 5rem;
         }
 
         gap: 3rem;
@@ -62,18 +40,79 @@
 
     &--imagen {
         margin: 0 2rem;
+        width: auto;
 
         @include m.tablet {
             margin: 0;
+            height: auto;
+            width: 70rem;
         }
     }
 
+    .cuenta {
+
+        margin: 3rem auto;
+
+        @include m.tablet {
+            margin: 5rem 0 0 5rem;
+        }
+
+        &__titulo {
+            margin: 0 0 1rem;
+            font-size: 2rem;
+            letter-spacing: 0.12em;
+            color: v.$rojo;
+        }
+
+        &__tiempos {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        &__item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-width: 7rem;
+        }
+
+        &__numero {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            text-align: center;
+            font-size: 4rem;
+            font-weight: 500;
+            line-height: 1;
+            color: #fff;
+            border: 1px solid #2a2a31;
+            border-radius: 4px;
+            font-variant-numeric: tabular-nums;
+        }
+
+        &__etiqueta {
+            margin-top: 0.6rem;
+            font-size: 1.3rem;
+            color: #e8343a;
+        }
+
+        @include m.tablet {
+            &__item {
+                min-width: 6rem;
+            }
+
+            &__numero {
+                font-size: 3rem;
+            }
+        }
+    }
 }
+
 
 .contenido-artistas {
     position: relative;
-    width: 700px;
-    height: 500px;
+    width: 0rem;
+    height: 77rem;
     display: none;
 
     @include m.tablet {
@@ -98,32 +137,32 @@
 // (ajusta left/bottom/height a tu gusto, el clip-path no depende de eso)
 // ==============================
 .taylor {
-    left: 160px;
-    height: 500;
-    top: 35px;
+    left: -60px;
+    height: 65rem;
+    top: 0px;
     z-index: 1;
     clip-path: polygon(29.41% 10.97%, 17.89% 17.18%, 16.42% 21.44%, 22.06% 29.95%, 18.87% 34.86%, 23.04% 37.15%, 22.79% 39.28%, 25.0% 40.43%, 24.02% 42.23%, 26.47% 43.54%, 25.98% 45.83%, 27.7% 48.61%, 28.19% 47.46%, 29.17% 47.79%, 29.17% 50.08%, 30.64% 50.41%, 33.58% 55.16%, 34.8% 60.07%, 33.82% 64.65%, 31.62% 66.28%, 34.07% 65.47%, 29.66% 69.07%, 34.07% 66.61%, 32.84% 67.59%, 34.07% 67.43%, 34.8% 69.39%, 25.25% 77.41%, 23.28% 81.67%, 24.02% 85.43%, 29.41% 93.78%, 30.39% 99.51%, 87.75% 99.84%, 93.14% 78.89%, 92.89% 69.56%, 95.59% 70.7%, 96.32% 72.34%, 96.32% 70.7%, 99.75% 73.16%, 97.3% 67.92%, 99.02% 67.59%, 98.04% 65.63%, 92.65% 61.54%, 91.67% 56.63%, 80.15% 37.15%, 78.92% 33.55%, 80.64% 34.37%, 78.92% 31.1%, 80.88% 32.9%, 79.9% 30.77%, 81.37% 31.42%, 78.19% 28.97%, 75.49% 25.2%, 76.72% 24.39%, 75.0% 24.06%, 70.59% 19.31%, 67.4% 14.08%, 59.07% 9.17%, 55.64% 8.18%, 45.1% 8.18%);
 }
 
 .theweekend {
-    left: 400px;
-    height: 440;
-    width: 450px;
-    top: -60px;
+    left: 160px;
+    height: 70rem;
+    width: 490px;
+    top: -70px;
     z-index: 0;
     clip-path: polygon(60.0% 13.31%, 57.78% 14.29%, 54.57% 12.99%, 44.44% 12.18%, 33.09% 13.64%, 33.58% 14.77%, 27.65% 16.07%, 26.67% 18.67%, 22.47% 21.1%, 23.46% 21.75%, 21.98% 22.73%, 21.48% 27.44%, 9.63% 30.68%, 2.96% 30.19%, 0.0% 32.79%, 0.0% 99.84%, 38.52% 99.84%, 40.74% 88.8%, 51.85% 92.05%, 57.04% 91.72%, 62.22% 84.74%, 65.43% 73.05%, 74.07% 69.64%, 78.27% 70.13%, 88.64% 65.91%, 90.86% 61.85%, 88.64% 58.28%, 95.56% 53.41%, 96.3% 50.49%, 92.59% 48.7%, 86.67% 49.35%, 81.73% 51.79%, 75.31% 51.3%, 72.1% 58.28%, 72.59% 60.55%, 62.47% 62.66%, 63.46% 66.07%, 58.77% 66.07%, 50.86% 63.8%, 52.35% 58.77%, 56.79% 56.01%, 61.23% 50.16%, 60.74% 47.24%, 58.52% 46.1%, 58.52% 42.53%, 54.07% 41.56%, 58.52% 39.12%, 57.04% 37.5%, 59.75% 36.04%, 58.27% 31.98%, 60.49% 30.36%, 60.49% 25.49%, 62.22% 24.51%, 62.96% 18.02%);
 }
 
 .aurora {
-    left: 310px;
+    left: 80px;
     height: 400px;
-    top: 250px;
+    top: 255px;
     z-index: 3;
     clip-path: polygon(47.63% 1.3%, 43.97% 2.23%, 41.38% 5.4%, 39.44% 18.81%, 32.54% 24.95%, 29.53% 35.38%, 27.59% 29.98%, 30.17% 22.72%, 26.29% 25.7%, 21.55% 19.37%, 22.41% 24.21%, 18.32% 19.74%, 16.59% 21.79%, 19.4% 25.7%, 15.3% 24.39%, 22.41% 30.73%, 24.14% 35.2%, 19.18% 54.0%, 21.55% 58.66%, 20.04% 69.83%, 23.28% 73.37%, 28.23% 50.84%, 31.9% 47.3%, 36.64% 35.57%, 38.36% 44.88%, 34.48% 50.28%, 31.03% 61.82%, 26.72% 98.51%, 67.67% 98.32%, 64.44% 59.22%, 59.91% 46.0%, 62.72% 34.26%, 69.83% 50.84%, 71.98% 74.67%, 75.22% 70.2%, 76.94% 52.89%, 74.57% 30.73%, 77.37% 26.26%, 82.33% 23.09%, 78.66% 22.72%, 81.68% 19.37%, 77.37% 20.67%, 79.31% 16.95%, 75.0% 21.6%, 76.08% 17.32%, 72.41% 22.35%, 68.97% 19.55%, 68.97% 25.7%, 58.62% 21.04%, 55.6% 6.52%, 52.8% 2.98%);
 }
 
 .edsheeram {
-    left: -25px;
+    left: -250px;
     height: 350px;
     top: 300px;
     z-index: 3;
@@ -132,9 +171,9 @@
 }
 
 .brunomars {
-    left: 485px;
+    left: 250px;
     height: 600px;
-    top: 45px;
+    top: 50px;
     z-index: 3;
     clip-path: polygon(56.81% 30.56%, 54.04% 30.56%, 53.58% 31.08%, 51.27% 30.73%, 46.88% 32.12%, 42.73% 34.2%, 42.73% 35.07%, 41.34% 35.42%, 41.11% 36.46%, 39.26% 37.5%, 38.57% 39.41%, 38.8% 43.92%, 38.11% 47.4%, 39.49% 50.52%, 33.03% 52.6%, 32.1% 54.51%, 24.48% 56.6%, 23.33% 57.47%, 21.94% 71.18%, 19.86% 80.03%, 16.17% 88.54%, 13.63% 99.83%, 21.94% 99.83%, 22.63% 98.44%, 23.79% 98.61%, 23.56% 99.83%, 67.21% 99.83%, 70.67% 98.09%, 63.51% 80.03%, 64.9% 70.31%, 68.36% 69.62%, 70.44% 67.88%, 71.36% 65.45%, 70.67% 62.85%, 71.36% 59.55%, 70.9% 57.12%, 65.59% 49.13%, 66.74% 45.49%, 68.59% 43.58%, 67.9% 42.71%, 61.66% 41.84%, 61.66% 40.28%, 63.28% 39.58%, 63.05% 36.46%, 60.97% 32.81%, 59.12% 32.81%);
 }
@@ -259,46 +298,181 @@ body.modal-abierto {
     cursor: pointer;
 }
 
-/* --- el contenedor con scroll propio --- */
-.artists {
-    margin-top: 3rem;
-    display: flex;
-    gap: 12px;
-    overflow-x: auto;
-    /* <- esto es lo que le da su propio scroll */
-    padding: 0 20px 12px;
-    scroll-snap-type: x mandatory;
-    /* hace que "encaje" en cada tarjeta */
-    -webkit-overflow-scrolling: touch;
-    /* scroll suave en iOS */
+
+// Artists
+.artists-seccion {
+    padding: 28px 0 32px;
     @include m.tablet{
         display: none;
     }
 }
 
-/* opcional: ocultar la barra de scroll fea */
-.artists::-webkit-scrollbar {
-    height: 0;
+// Divisor con rombo
+.artists-divisor {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 0 16px 4rem;
+
+    &::before,
+    &::after {
+        content: "";
+        flex: 1;
+        height: 1px;
+        background: #2a2a31;
+    }
+
+    span {
+        width: 9px;
+        height: 9px;
+        background: v.$rojo;
+        transform: rotate(45deg);
+    }
 }
 
+// Título
+.artists-cabecera {
+    margin: 0 16px 18px;
+
+    &__etiqueta {
+        margin: 0 0 4px;
+        font-size: 12px;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        color: v.$rojo;
+    }
+
+    &__titulo {
+        margin: 0;
+        font-family: "Bebas Neue", sans-serif;
+        font-weight: 400;
+        font-size: 40px;
+        line-height: 0.95;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+        color: v.$blanco;
+    }
+}
+
+// Carrusel (solo scroll)
 .artists {
+    --ancho: min(270px, 70vw);
+
+    display: flex;
+    gap: 12px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
     scrollbar-width: none;
+
+    &::-webkit-scrollbar {
+        display: none;
+    }
 }
 
 .artist {
-    display: flex;
-    flex-direction: column ;
-    align-items: center;
-    img{
-        width:fit-content;
+    position: relative;
+    flex: 0 0 90%;
+    aspect-ratio: 27 / 37;
+    overflow: hidden;
+    border: 1px solid v.$plomo;
+    border-radius: 10px;
+    background: v.$negro;
+    opacity: 0.5;
+    scroll-snap-align: center;
+    cursor: pointer;
+    transition: opacity 0.3s, border-color 0.3s;
+
+    &.activo {
+        opacity: 1;
+        border-color: v.$rojo;
     }
-    /* ancho fijo de cada tarjeta (no se achica) */
-    scroll-snap-align: start;
-    /* cada tarjeta "engancha" al hacer scroll */
-    border-radius: 4px;
-    background: linear-gradient(160deg, #2a2a2a, #080808);
-    display: flex;
-    color: #8a8a8a;
-    font-size: 13px;
+
+    // Foto en blanco y negro con tinte rojo para unificarlas
+    img {
+        display: block;
+        padding: 2rem;
+        width: 100%;
+        height: 100%;
+    }
+
+    &::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: v.$rojo;
+        mix-blend-mode: multiply;
+        opacity: 0.3;
+        pointer-events: none;
+    }
+
+    &__contador {
+        position: absolute;
+        top: 12px;
+        right: 12px;
+        z-index: 2;
+        padding: 4px 8px;
+        font-size: 12px;
+        letter-spacing: 0.12em;
+        color: v.$blanco;
+        background: rgba(0, 0, 0, 0.6);
+        border-radius: 2px;
+    }
+
+    &__info {
+        position: absolute;
+        inset: auto 0 0 0;
+        z-index: 2;
+        padding: 14px 16px 16px;
+        background: rgba(8, 8, 11, 0.82);
+        border-top: 1px solid v.$plomo;
+    }
+
+    &__genero {
+        display: inline-block;
+        margin-bottom: 6px;
+        padding: 2px 8px;
+        font-size: 11px;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: v.$rojo;
+        border: 1px solid v.$rojo;
+        border-radius: 2px;
+    }
+
+    &__nombre {
+        margin: 0;
+        font-family: "Bebas Neue", sans-serif;
+        font-size: 44px;
+        line-height: 1;
+        letter-spacing: 0.04em;
+        color: v.$blanco;
+    }
 }
 
+// Puntos e indicación
+.artists-puntos {
+    display: flex;
+    justify-content: center;
+    gap: 6px;
+    margin: 18px 0 12px;
+
+    span {
+        width: 6px;
+        height: 6px;
+        border-radius: 3px;
+        background: v.$plomo;
+        transition: width 0.3s, background 0.3s;
+
+        &.activo {
+            width: 24px;
+            background: v.$rojo;
+        }
+    }
+}
+
+.artists-ayuda {
+    margin: 0;
+    text-align: center;
+    font-size: 13px;
+    color: v.$plomoClaro;
+}

@@ -18,19 +18,35 @@ incluirTemplate("header", true);
     </div>
 </div>
 <main>
-    <div class="contenido contenedor flex centrar">
+    <div class="contenido flex centrar">
         <div class="contenido-texto flex">
-            <h1 class="contenido-texto--titulo">Music <span>Festival</span> </h1>
-            <picture>
-                <source src="build/img/image.avif" type="image/avif" loading="lazy">
-                <source src="build/img/image.webp" type="image/webp" loading="lazy">
-            </picture>
-            <img src="build/img/image.png" alt="" loading="lazy" class="contenido-texto--imagen">
-            <h3 class="contenido-texto--subtitulo">
-                Find yourself in the music
-            </h3>
+            <img src="build/img/red-diamond@2x.png" alt="Red Diamond Tourné" class="contenido-texto--imagen">
+            <div class="cuenta" role="timer" aria-label="Tiempo restante para el show">
+                <p class="cuenta__titulo">Faltan para el show</p>
+                <div class="cuenta__tiempos">
+                    <div class="cuenta__item">
+                        <span class="cuenta__numero" id="cuentaDias">000</span>
+                        <span class="cuenta__etiqueta">días</span>
+                    </div>
+                    <div class="cuenta__item">
+                        <span class="cuenta__numero" id="cuentaHoras">00</span>
+                        <span class="cuenta__etiqueta">horas</span>
+                    </div>
+                    <div class="cuenta__item">
+                        <span class="cuenta__numero" id="cuentaMinutos">00</span>
+                        <span class="cuenta__etiqueta">min</span>
+                    </div>
+                    <div class="cuenta__item">
+                        <span class="cuenta__numero" id="cuentaSegundos">00</span>
+                        <span class="cuenta__etiqueta">seg</span>
+                    </div>
+                </div> <!-- cuentas__tiempos -->
+            </div> <!-- cuenta -->
+
+
+
             <div class="contenido-texto--botones flex">
-                <a href="" class="boton-rojo-block">Slide show</a>
+                <a href="#entradas" class="boton-rojo-block">Comprar entradas</a>
                 <a href="" class="boton-negro-block">Learn More</a>
             </div><!-- contenido-texto--botones -->
         </div><!-- contenido-texto -->
@@ -52,17 +68,72 @@ incluirTemplate("header", true);
                 data-nombre="Bruno Mars" data-genero="Funk & Soul Master"
                 data-info="High energy performance with full brass orchestra.">
         </div> <!-- contenido artistas -->
+        
+        <section class="artists-seccion">
+            <div class="artists-divisor"><span></span></div>
 
-        <div class="artists">
-            <div class="artist"> <img src="build/img/auroraAsknes-artista.png" alt="">Artista 1</div>
-            <div class="artist"><img src="build/img/brunoMars-artista.png">Artista 2</div>
-            <div class="artist"><img src="build/img/edSheeran-artista.png">Artista 3</div>
-            <div class="artist"><img src="build/img/taylorSwift-artista.png">Artista 4</div>
-            <div class="artist"><img src="build/img/theWeeknd-artista.png">Artista 5</div>
-        </div>
+            <div class="artists-cabecera">
+                <p class="artists-cabecera__etiqueta">Line-up</p>
+                <h3 class="artists-cabecera__titulo">Cinco artistas.<br>Una noche.</h3>
+            </div>
+
+            <div class="artists" id="artistas">
+                <div class="artist" data-nombre="Aurora" data-genero="Ethereal Folk-Pop"
+                    data-info="Voz etérea y folk-pop con toques mágicos y envolventes.">
+                    <img src="build/img/auroraAsknes-artista.png" alt="Aurora" loading="lazy">
+                    <span class="artist__contador">01 / 05</span>
+                    <div class="artist__info">
+                        <span class="artist__genero">Ethereal Folk-Pop</span>
+                        <p class="artist__nombre">Aurora</p>
+                    </div>
+                </div>
+
+                <div class="artist" data-nombre="Bruno Mars" data-genero="Funk & Soul Master"
+                    data-info="High energy performance with full brass orchestra.">
+                    <img src="build/img/brunoMars-artista.png" alt="Bruno Mars" loading="lazy">
+                    <span class="artist__contador">02 / 05</span>
+                    <div class="artist__info">
+                        <span class="artist__genero">Funk &amp; Soul Master</span>
+                        <p class="artist__nombre">Bruno Mars</p>
+                    </div>
+                </div>
+
+                <div class="artist" data-nombre="Ed Sheeran" data-genero="Singer-Songwriter"
+                    data-info="Guitarra, voz y baladas que llenan estadios enteros.">
+                    <img src="build/img/edSheeran-artista.png" alt="Ed Sheeran" loading="lazy">
+                    <span class="artist__contador">03 / 05</span>
+                    <div class="artist__info">
+                        <span class="artist__genero">Singer-Songwriter</span>
+                        <p class="artist__nombre">Ed Sheeran</p>
+                    </div>
+                </div>
+
+                <div class="artist" data-nombre="Taylor Swift" data-genero="Pop Icon"
+                    data-info="Letras que marcaron a toda una generación, en un show lleno de sorpresas.">
+                    <img src="build/img/taylorSwift-artista.png" alt="Taylor Swift" loading="lazy">
+                    <span class="artist__contador">04 / 05</span>
+                    <div class="artist__info">
+                        <span class="artist__genero">Pop Icon</span>
+                        <p class="artist__nombre">Taylor Swift</p>
+                    </div>
+                </div>
+
+                <div class="artist" data-nombre="The Weeknd" data-genero="R&B / Alternative"
+                    data-info="R&B oscuro y atmosférico con éxitos globales.">
+                    <img src="build/img/theWeeknd-artista.png" alt="The Weeknd" loading="lazy">
+                    <span class="artist__contador">05 / 05</span>
+                    <div class="artist__info">
+                        <span class="artist__genero">R&amp;B / Alternative</span>
+                        <p class="artist__nombre">The Weeknd</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="artists-puntos" id="artistasPuntos"></div>
+            <p class="artists-ayuda">Desliza para ver a todos los artistas</p>
+        </section>
 
     </div><!-- contenido -->
-
 
     <section class="nosotros flex contenedor centrar" id="nosotros">
         <div class="nosotros-texto">
@@ -113,7 +184,7 @@ incluirTemplate("header", true);
             <source src="build/img/image3.webp" type="image/webp">
         </picture>
         <img src="build/img/image3.png" alt="hombre en bateria" loading="lazy" class="servicios-image1">
-        
+
         <div class="servicios-contenido ">
 
             <div class="servicios-texto">
@@ -143,7 +214,7 @@ incluirTemplate("header", true);
         </h2>
 
         <p class="entradas__subtitulo">
-            Dos formas de vivir una noche inolvidable
+            Lorem ipsum dolor sit amet.
         </p>
 
         <div class="entradas__contenedor flex">
@@ -162,7 +233,7 @@ incluirTemplate("header", true);
                     <li>Acceso al evento</li>
                 </ul>
 
-                <a href="http://localhost:3000/tickets.php?paso=1" class="boton-negro-block entrada__boton">
+                <a href="tickets.php?paso=1" class="boton-negro-block entrada__boton">
                     Comprar tickets
                 </a>
             </div>
@@ -181,7 +252,7 @@ incluirTemplate("header", true);
                     <li>Acceso al evento</li>
                 </ul>
 
-                <a href="http://localhost:3000/tickets.php?paso=1" class="boton-negro-block entrada__boton">
+                <a href="tickets.php?paso=1" class="boton-negro-block entrada__boton">
                     Comprar tickets
                 </a>
             </div>
@@ -200,7 +271,7 @@ incluirTemplate("header", true);
                     <li>Acceso al evento</li>
                 </ul>
 
-                <a href="http://localhost:3000/tickets.php?paso=1" class="boton-rojo-block entrada__boton">
+                <a href="tickets.php?paso=1" class="boton-rojo-block entrada__boton">
                     Comprar tickets
                 </a>
             </div>

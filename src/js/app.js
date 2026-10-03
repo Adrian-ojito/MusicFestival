@@ -2,6 +2,8 @@ document.addEventListener("DOMContentLoaded", function () {
     navegacionPerfil();
     volver();
     modalArtistasIndex();
+    contadorShow();
+    carruselArtistas();
 
     const pasoActual = getActivo(); // 1, 2 o 3
 
@@ -227,6 +229,40 @@ function modalArtistasIndex() {
     });
 }
 
+// Contador para el show
+function contadorShow() {
+    const dias = document.getElementById("cuentaDias");
+    const horas = document.getElementById("cuentaHoras");
+    const minutos = document.getElementById("cuentaMinutos");
+    const segundos = document.getElementById("cuentaSegundos");
+    if (!dias || !horas || !minutos || !segundos) return; // por si esta función corre en una página sin contador
+
+    // los meses van de 0 a 11, por eso diciembre es 11
+    const fechaShow = new Date(2027, 11, 17, 20, 0, 0).getTime();
+
+    const dosDigitos = (n) => String(n).padStart(2, "0");
+
+    function actualizar() {
+        let diferencia = fechaShow - Date.now();
+
+        if (diferencia <= 0) {
+            diferencia = 0;
+            clearInterval(intervalo);
+        }
+
+        const totalSegundos = Math.floor(diferencia / 1000);
+
+        dias.textContent = String(Math.floor(totalSegundos / 86400)).padStart(3, "0");
+        horas.textContent = dosDigitos(Math.floor((totalSegundos % 86400) / 3600));
+        minutos.textContent = dosDigitos(Math.floor((totalSegundos % 3600) / 60));
+        segundos.textContent = dosDigitos(totalSegundos % 60);
+    }
+
+    const intervalo = setInterval(actualizar, 1000);
+    actualizar();
+}
+
+
 const botonHamburguesa = document.getElementById('navegacion-hamburguesa');
 const enlacesNav = document.querySelector('.navegacion-enlaces');
 
@@ -234,3 +270,28 @@ botonHamburguesa.addEventListener('click', () => {
     botonHamburguesa.classList.toggle('activo');
     enlacesNav.classList.toggle('activo');
 });
+
+function carruselArtistas() {
+    const pista = document.getElementById("artistas");
+    const contenedorPuntos = document.getElementById("artistasPuntos");
+    if (!pista || !contenedorPuntos) return; // por si corre en una página sin carrusel
+
+    const tarjetas = [...pista.querySelectorAll(".artist")];
+    const puntos = tarjetas.map(() => contenedorPuntos.appendChild(document.createElement("span")));
+
+    const centroDe = (tarjeta) => tarjeta.offsetLeft + tarjeta.offsetWidth / 2;
+
+    function marcarActivo() {
+        const centroPista = pista.scrollLeft + pista.clientWidth / 2;
+
+        const actual = tarjetas.reduce((mejor, tarjeta, i) =>
+            Math.abs(centroDe(tarjeta) - centroPista) < Math.abs(centroDe(tarjetas[mejor]) - centroPista) ? i : mejor
+            , 0);
+
+        tarjetas.forEach((t, i) => t.classList.toggle("activo", i === actual));
+        puntos.forEach((p, i) => p.classList.toggle("activo", i === actual));
+    }
+
+    pista.addEventListener("scroll", marcarActivo, { passive: true });
+    marcarActivo();
+}

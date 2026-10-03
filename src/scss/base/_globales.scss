@@ -33,7 +33,7 @@ main {
 
 
 .contenedor {
-    max-width: 120rem;
+    max-width: 130rem;
 }
 
 .border {
@@ -61,4 +61,19 @@ h3 {
 h1 {
     font-size: 8rem;
     font-weight: 900;
+}
+
+p{
+    font-family: v.$fuente-secundaria;
+}
+
+li,
+b {
+    color: v.$blanco;
+    
+
+}
+
+li{
+    font-size: 1.5rem;
 }

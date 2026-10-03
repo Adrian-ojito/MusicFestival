@@ -2,18 +2,19 @@
 @use "../base/mixins" as m;
 
 .header {
-    display: block;
     margin: 0;
-    @include m.tablet{
-                margin: 0 3rem;
+    flex-direction: column;
+
+    @include m.tablet {
+        margin: 0 3rem;
+        flex-direction: row;
     }
 
-    &--cabeza{
+    &--cabeza {
         display: flex;
         align-items: center;
         justify-content: space-between;
-        padding: 0 1rem;
-        width: 100%;
+        margin: 0 2rem;
     }
 
     @include m.tablet {
@@ -30,18 +31,16 @@
 
         @include m.tablet {
             margin: 0;
-            display: fe7;
         }
     }
 
     .navegacion {
+
         @include m.tablet {
             width: 70rem;
         }
 
         align-items: center;
-
-
     }
 
 
@@ -53,6 +52,7 @@
         @include m.tablet {
             display: flex;
             justify-content: space-between;
+            margin-left: 1rem;
             align-items: center;
             list-style: none;
             padding: 0;
@@ -64,11 +64,15 @@
         display: flex;
         flex-direction: column;
         gap: 1rem;
-        top: 6.5rem;
-        right: 6rem;
+        left: 16rem;
         visibility: hidden;
         opacity: 0;
-        transition: opacity 1s ease;
+
+        @include m.tablet {
+            top: 6.5rem;
+            right: 6.5rem;
+            left: unset;
+        }
 
         a {
             text-decoration: none;
@@ -79,21 +83,25 @@
             visibility: visible;
             opacity: 1;
         }
+
+        &__enlace {
+            transition: unset;
+            z-index: 20;
+        }
     }
 
     .perfil {
         cursor: pointer;
+        text-align: center;
     }
 
 
     .navegacion-enlace {
         a {
-            margin-bottom: 1rem;
             text-align: center;
             text-decoration: none;
             color: v.$blanco;
-            font-family: v.$fuente-principal;
-            font-weight: lighter;
+            font-size: 2rem;
             display: block;
             transition: filter 0.35s ease, transform 0.35s ease;
         }
@@ -102,6 +110,7 @@
             transform: scale(1.20);
             color: v.$rojo;
         }
+
     }
 
 }
@@ -147,7 +156,7 @@
     .navegacion-hamburguesa {
         display: block;
 
-        &-linea{
+        &-linea {
             margin-top: 5px;
         }
     }
@@ -162,6 +171,7 @@
 
         &.activo {
             max-height: 40rem;
+            display: block;
         }
 
         .navegacion-enlace {
