@@ -2,12 +2,13 @@
 @use "../base/mixins" as m;
 
 .servicios {
-    margin: 5rem 2rem 0 2rem;
+    padding: 5rem 2rem 0 0rem;
 
     @include m.tablet {
         position: relative;
         height: 70rem;
         overflow: hidden;
+        margin-bottom: 7rem;
     }
 
     img {
@@ -24,7 +25,7 @@
             grid-template-rows: auto 1fr;
             position: relative;
             bottom: 25rem;
-            left: 60rem;
+            left: 50rem;
             width: 80rem;
         }
 
@@ -38,7 +39,7 @@
             text-align: unset;
             margin-top: 0;
             position: absolute;
-            left: 60rem;
+            left: 50rem;
         }
     }
 
@@ -65,7 +66,7 @@
         @include m.tablet {
             display: inline;
             position: relative;
-            left: 60rem;
+            left: 50rem;
             top: 32rem;
             width: 55rem;
             height: 30rem;
@@ -81,8 +82,8 @@
         @include m.tablet {
             margin-top: 0;
             position: relative;
-            right: 30rem;
-            bottom: 48rem;
+            right: 40rem;
+            bottom: 45rem;
         }
 
 

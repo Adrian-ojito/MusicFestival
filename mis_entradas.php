@@ -1,36 +1,35 @@
 <?php
 require "includes/funciones.php";
-incluirTemplate("header", true);
-
+requerirLogin();                       // antes de imprimir el header
 require "includes/config/database.php";
 $db = conectarBD();
-$query = "SELECT cantidad,total,telefono_asistente,email_asistente,id_evento  FROM compras WHERE id_usuario=" . $_SESSION['id_usuario'] . ";";
-$resultado = mysqli_query($db, $query);
-$compras = mysqli_fetch_all($resultado, MYSQLI_ASSOC);
 
+$stmt = $db->prepare("SELECT c.id_compra, c.cantidad, c.total, c.telefono_asistente, c.email_asistente,  e.lugar AS zona, e.nombre
+                    FROM compras c JOIN eventos e ON e.id_evento = c.id_evento
+                    WHERE c.id_usuario = ? ORDER BY c.fecha_compra DESC");
+$stmt->bind_param("i", $_SESSION['id_usuario']);
+$stmt->execute();
+$compras = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
 
-
+incluirTemplate("header", true);
 ?>
 
 <main class="mis-entradas centrar">
 
     <h1 class="mis-entradas__titulo">Mis entradas</h1>
-    <p class="mis-entradas__sub">Tienes 2 compras para Red Diamond Tourné. Muestra el QR en la puerta.</p>
+    <p class="mis-entradas__sub">Tienes <?= count($compras) ?> compra(s)</p>
 
     <?php foreach ($compras as $compra): ?>
 
         <?php
-        $query = "SELECT lugar FROM eventos WHERE id_evento=" . $compra["id_evento"] . ";";
-        $resultado_eventos = mysqli_query($db, $query);
-        $evento = mysqli_fetch_assoc($resultado_eventos);
-        $lugar = $evento["lugar"];
-        $clase_zona = strtolower(str_replace(' ', '-', $lugar)); // "Platea Golden" -> "platea-golden"
+        $lugar = $compra["zona"];
+        $clase_zona = strtolower(str_replace(" ", "-", $lugar));
         ?>
 
         <section class="tickets  flex">
             <div class="ticket ">
                 <div class="ticket__header flex">
-                    <span class="ticket__zona ticket__zona--<?php echo $clase_zona; ?>"><?php echo $lugar; ?></span>
+                    <span class="ticket__zona ticket__zona--<?php echo $clase_zona; ?>"><?= htmlspecialchars($lugar) ?></span>
                     <span class="ticket__estado">Válida</span>
                 </div>
                 <h2 class="ticket__titulo">Red Diamond Tourné</h2>
@@ -42,10 +41,14 @@ $compras = mysqli_fetch_all($resultado, MYSQLI_ASSOC);
                 </ul>
 
                 <div class="ticket__compra flex">
-                    <div><small>Cantidad</small><b><?php echo $compra['cantidad']; ?></b></div>
+                    <div><small>Cantidad</small><b><?= htmlspecialchars($compra['cantidad']) ?></b></div>
                     <div><small>Total pagado</small><b>S/ <?php echo number_format($compra['total'], 2); ?></b></div>
-                    <div><p><small>Teléfono</small><b><?php echo $compra['telefono_asistente']; ?></b></p></div>
-                    <div><p><small>Email</small><b><?php echo $compra['email_asistente']; ?></b></p></div>
+                    <div>
+                        <p><small>Teléfono</small><b><?php echo htmlspecialchars($compra['telefono_asistente']) ; ?></b></p>
+                    </div>
+                    <div>
+                        <p><small>Email</small><b><?php echo htmlspecialchars($compra['email_asistente']); ?></b></p>
+                    </div>
                 </div>
 
 
@@ -53,9 +56,8 @@ $compras = mysqli_fetch_all($resultado, MYSQLI_ASSOC);
 
             <div class="ticket__descargar flex">
                 <img class="ticket__qr" src="https://qrtiger.com/temp/1791063000796.png" alt="QR Code entrada" />
-                        <a href="#" class="boton-negro-block">Descargar</a>
-                    </div>
-                </div>
+                <a href="#" onclick="window.print(); return false;" class="boton-negro-block">Imprimir</a>
+            </div>
         </section>
     <?php endforeach; ?>
 </main>

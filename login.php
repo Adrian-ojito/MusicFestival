@@ -1,54 +1,35 @@
 <?php
-$operacion = $_GET["registro"] ?? "";
+session_start();                          
 require "includes/config/database.php";
 $db = conectarBD();
 
-$usuario = $_POST['usuario'] ?? "";
-$password = $_POST['password'] ?? "";
+$operacion = $_GET["registro"] ?? "";    
 $errores = [];
-?>
+$usuario = "";
 
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    $usuario = trim($_POST["usuario"] ?? "");   
+    $password = $_POST["password"] ?? "";
 
-<?php if ($_SERVER["REQUEST_METHOD"] == "POST") {
-
-    if (empty($usuario)) {
-        $errores[] = "Nombre de usuario obligatorio";
-    }
-    if (empty($password)) {
-        $errores[] = "Contraseña obligatoria";
-    }
-    if (!empty($password) && strlen($password) < 8) {
-        $errores[] = "La contraseña debe tener al menos 8 caracteres";
+    if ($usuario === "" || $password === "") {
+        $errores[] = "Usuario y contraseña son obligatorios";
     }
 
     if (empty($errores)) {
-        $usuario = htmlspecialchars(trim($usuario), ENT_QUOTES, 'UTF-8');
+        $stmt = $db->prepare("SELECT id_usuario, contrasena_hash FROM usuarios WHERE nombre = ?");
+        $stmt->bind_param("s", $usuario);
+        $stmt->execute();
+        $fila = $stmt->get_result()->fetch_assoc();
 
-        $query = "SELECT nombre, contraseña_hash, id_usuario FROM usuarios";
-        $resultados = mysqli_query($db, $query);
-
-        $usuarioPassword = null;
-        while ($resultado = mysqli_fetch_assoc($resultados)):
-            if ($resultado["nombre"] === $usuario) {
-                $usuarioPassword = $resultado["contraseña_hash"];
-                $id_usuario = $resultado["id_usuario"];
-            }
-        endwhile;
-
-        if ($usuarioPassword === null) {
-            $errores[] = "Usuario no encontrado";
+        if ($fila && password_verify($password, $fila["contrasena_hash"])) {
+            session_regenerate_id(true);
+            $_SESSION["login"] = true;
+            $_SESSION["usuario"] = $usuario;
+            $_SESSION["id_usuario"] = $fila["id_usuario"];
+            header("Location: /index.php");   
+            exit;                             
         } else {
-            $auth = password_verify($password, $usuarioPassword);
-            if ($auth) {
-                session_start();
-                $_SESSION["login"] = true;
-                $_SESSION["usuario"] = $usuario;
-                $_SESSION["id_usuario"] = $id_usuario; // ahora SÍ lo guardas en la sesión
-                header("Location: /index.php");
-                exit;
-            } else {
-                $errores[] = "El password es incorrecto";
-            }
+            $errores[] = "Usuario o contraseña incorrectos";
         }
     }
 }
@@ -77,11 +58,11 @@ $errores = [];
         </div>
     <?php } ?>
     <h2 class=" login__titulo">iniciar sesion</h2>
-    <p>Bienvenido de nuevo a <span class="login__marca">Global Music Group</span></p>
+    <p>“Crea tu cuenta en<span class="login__marca">Global Music Group</span></p>
 
     <?php foreach ($errores as $error): ?>
         <div class=" alerta error">
-            <?php echo $error; ?>
+            <?php echo htmlspecialchars($error) ?>
         </div>
     <?php endforeach; ?>
     <form method="POST" class="login__form">
@@ -90,7 +71,7 @@ $errores = [];
             </legend>
 
             <label for="usuario" class="login__label">NOMBRE DE USUARIO</label>
-            <input type="text" id="usuario" placeholder="ingresa tu usuario" class="login__input" name="usuario" value="<?php echo $usuario; ?>">
+            <input type="text" id="usuario" placeholder="ingresa tu usuario" class="login__input" name="usuario" value="<?= htmlspecialchars($usuario) ?>">
 
             <label for="password" class="login__label">CONTRASEÑA</label>
             <input type="password" id="password" placeholder="ingresa tu CONTRASEÑA" class="login__input" name="password">
@@ -107,7 +88,7 @@ $errores = [];
 
     </div>
 
-    <img class="login--imagen " src="/build/img/image2.png" alt="">
+    <img class="login--imagen " src="/build/img/poster1.png" alt="">
     </section>
 
 

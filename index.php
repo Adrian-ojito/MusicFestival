@@ -20,7 +20,7 @@ incluirTemplate("header", true);
 <main>
     <div class="contenido flex centrar">
         <div class="contenido-texto flex">
-            <img src="build/img/red-diamond@2x.png" alt="Red Diamond Tourné" class="contenido-texto--imagen">
+            <img src="build/img/red_diamond_tournee_logo.png" alt="Red Diamond Tourné" class="contenido-texto--imagen">
             <div class="cuenta" role="timer" aria-label="Tiempo restante para el show">
                 <p class="cuenta__titulo">Faltan para el show</p>
                 <div class="cuenta__tiempos">
@@ -52,23 +52,23 @@ incluirTemplate("header", true);
         </div><!-- contenido-texto -->
 
         <div class="contenido-artistas">
-            <img src="build/img/taylorSwift.png" class="artista_ taylor" alt="Taylor Swift"
+            <img src="build/img/TaylorSwiftt.png" class="artista_ taylor" alt="Taylor Swift"
                 data-nombre="Taylor Swift" data-genero="Pop Icon"
                 data-info="Letras que marcaron a toda una generación, en un show lleno de sorpresas.">
-            <img src="build/img/edSheram.png" class="artista_ edsheeram" alt="Ed Sheeran"
+            <img src="build/img/EdSheramm.png" class="artista_ edsheeram" alt="Ed Sheeran"
                 data-nombre="Ed Sheeran" data-genero="Singer-Songwriter"
                 data-info="Guitarra, voz y baladas que llenan estadios enteros.">
-            <img src="build/img/theWekkend.png" class="artista_ theweekend" alt="The Weeknd"
+            <img src="build/img/TheWekkendd.png" class="artista_ theweekend" alt="The Weeknd"
                 data-nombre="The Weeknd" data-genero="R&B / Alternative"
                 data-info="R&B oscuro y atmosférico con éxitos globales.">
-            <img src="build/img/auroraAsknes.png" class="artista_ aurora" alt="Aurora"
+            <img src="build/img/Aurora.png" class="artista_ aurora" alt="Aurora"
                 data-nombre="Aurora" data-genero="Ethereal Folk-Pop"
                 data-info="Voz etérea y folk-pop con toques mágicos y envolventes.">
-            <img src="build/img/brunoMars.png" class="artista_ brunomars" alt="Bruno Mars"
+            <img src="build/img/brunomars.png" class="artista_ brunomars" alt="Bruno Mars"
                 data-nombre="Bruno Mars" data-genero="Funk & Soul Master"
                 data-info="High energy performance with full brass orchestra.">
         </div> <!-- contenido artistas -->
-        
+
         <section class="artists-seccion">
             <div class="artists-divisor"><span></span></div>
 
@@ -159,10 +159,10 @@ incluirTemplate("header", true);
             <a href="build/img/image2.png" class="boton-rojo-block">Explore Now</a>
             <div class="nosotros-imagen1">
                 <picture>
-                    <source src="build/img/image2.avif" type="image/avif">
-                    <source src="build/img/image2.webp" type="image/webp">
+                    <source srcset="build/img/image2.avif" type="image/avif">
+                    <source srcset="build/img/image2.webp" type="image/webp">
+                    <img src="build/img/image2.png" alt="Público en concierto" loading="lazy">
                 </picture>
-                <img src="build/img/image2.png" alt="imagen de concierto" loading="lazy">
             </div> <!-- nosotros-imagen -->
 
 
