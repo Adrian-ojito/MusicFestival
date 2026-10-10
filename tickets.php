@@ -1,11 +1,6 @@
 <?php
-
-session_start();
-var_dump($_SESSION);
-if (empty($_SESSION['login'])) {
-    header("Location: login.php");
-    exit;
-}
+require "includes/funciones.php"; 
+requerirLogin();
 
 require "includes/config/database.php";
 $db = conectarBD();
@@ -21,17 +16,30 @@ $errores = [];
 
 // Datos de entradas
 
-$ticket = $_GET['ticket'] ?? null;
+$ticket = trim($_POST['ticket'] ?? $_GET['ticket'] ?? '');
 $paso = $_GET['paso'] ?? null;
 
 
-$query = "SELECT nombre, lugar, precio, entradas_disponibles FROM eventos WHERE nombre='$ticket';";
-$resultado = mysqli_query($db, $query);
-$datosTicket = mysqli_fetch_assoc($resultado) ?? null;
+// $query = "SELECT nombre, lugar, precio, entradas_disponibles FROM eventos WHERE nombre='$ticket';";
+// $resultado = mysqli_query($db, $query);
+// $datosTicket = mysqli_fetch_assoc($resultado) ?? null;
+
+$stmt= $db->prepare("SELECT nombre, lugar, precio, entradas_disponibles FROM eventos WHERE nombre = ?");
+$stmt->bind_param("s", $ticket);
+$stmt->execute();
+$datosTicket = $stmt->get_result()->fetch_assoc() ? : [];
+
+
 $nombre = $datosTicket['nombre'] ?? '';
 $precio = $datosTicket['precio'] ?? '';
 $lugar = $datosTicket['lugar'] ?? '';
 $entradas_disponibles = $datosTicket['entradas_disponibles'] ?? 0;
+
+
+
+
+
+
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     if (empty($_POST['nombre']) || empty($_POST['dni']) || empty($_POST['email']) || empty($_POST['telefono'])) {

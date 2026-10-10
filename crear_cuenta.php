@@ -1,54 +1,37 @@
 <?php
+require "includes/funciones.php";
 require "includes/config/database.php";
+iniciarSesion();
 $db = conectarBD();
 
-
-$usuario = $_POST['usuario'] ?? null;
-$password = $_POST['password'] ?? null;
-
+$usuario = '';
 $errores = [];
-?>
 
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    if (!verificarCsrf()) $errores[] = "Sesión expirada, recarga la página.";
+    $usuario   = trim($_POST['usuario'] ?? '');
+    $password  = $_POST['password'] ?? '';
+    $password2 = $_POST['password2'] ?? '';
 
-<?php if ($_SERVER["REQUEST_METHOD"] == "POST") {
-
-    if (empty($usuario)) {
-        $errores[] = "Nombre de usuario obligatorio";
-    }
-    if (empty($password)) {
-        $errores[] = "Contraseña obligatoria";
-    }
-    if (!empty($password) && strlen($password) < 8) {
-        $errores[] = "La contraseña debe tener al menos 8 caracteres";
-    }
-
-    $query = "SELECT nombre, contraseña_hash FROM usuarios";
-    $resultados = mysqli_query($db, $query);
-    $usuario = htmlspecialchars(trim($usuario), ENT_QUOTES, 'UTF-8');
-
-    while ($resultado = mysqli_fetch_assoc($resultados)):
-        if ($resultado["nombre"] === $usuario) {
-            $errores[] = "Use un diferente nombre usuario";
-        }
-    endwhile;
+    if (!preg_match('/^[A-Za-z0-9_.-]{3,30}$/', $usuario)) $errores[] = "Usuario: 3 a 30 caracteres (letras, números, _ . -)";
+    if (strlen($password) < 8) $errores[] = "La contraseña debe tener al menos 8 caracteres";
+    if ($password !== $password2) $errores[] = "Las contraseñas no coinciden";
 
     if (empty($errores)) {
-        
-        $password = password_hash($password, PASSWORD_BCRYPT);
-
-        $query = "INSERT INTO usuarios (nombre, contraseña_hash) VALUES 
-                    ('$usuario', '$password' );";
-        $resultado = mysqli_query($db, $query);
-        if ($resultado) {
-            header("Location: ../login.php?registro=exitoso");
-            exit();
-        } else {
-            header("Location: ../crear_cuenta.php?registro=error");
-            exit();
+        $hash = password_hash($password, PASSWORD_DEFAULT);
+        $stmt = $db->prepare("INSERT INTO usuarios (nombre, contrasena_hash) VALUES (?, ?)");
+        $stmt->bind_param("ss", $usuario, $hash);
+        try {
+            $stmt->execute();
+            header("Location: /login.php?registro=exitoso");
+            exit;
+        } catch (mysqli_sql_exception $e) {
+            if ($e->getCode() === 1062) $errores[] = "Ese nombre de usuario ya existe";
+            else { error_log($e->getMessage()); $errores[] = "No pudimos crear tu cuenta. Intenta de nuevo."; }
         }
     }
-} ?>
-
+}
+?>
 
 
 <!DOCTYPE html>
@@ -68,13 +51,14 @@ $errores = [];
     <section class="login">
         <a href="index.php" class="login__logo"><img src="build/img/logo.png" alt="logo empresa"></a>
 
+        <img class="login--imagen " src="/build/img/image2.png" alt="">
         <div class="login__card  centrar"">
         <h2 class=" login__titulo">Crear Cuenta</h2>
-            <p>Bienvenido de nuevo a <span class="login__marca">Global Music Group</span></p>
+            <p>“Crea tu cuenta en Global Music Group <span class="login__marca">Global Music Group</span></p>
 
             <?php foreach ($errores as $error): ?>
                 <div class="alerta error">
-                    <?php echo $error; ?>
+                    <?php echo htmlspecialchars($error) ?>
                 </div>
             <?php endforeach ?>
 
@@ -84,10 +68,10 @@ $errores = [];
                     </legend>
 
                     <label for="usuario" class="login__label">NOMBRE DE USUARIO</label>
-                    <input type="text" id="usuario" placeholder="ingresa tu usuario" class="login__input" name="usuario" value="<?php echo $usuario; ?>">
+                    <input type="text" id="usuario" placeholder="ingresa tu usuario" class="login__input" name="usuario" value="<?php echo htmlspecialchars($usuario); ?>">
 
                     <label for="password" class="login__label">CONTRASEÑA</label>
-                    <input type="password" id="password" placeholder="ingresa tu CONTRASEÑA" class="login__input" name="password" value="<?php echo $password; ?>">
+                    <input type="password" id="password" placeholder="ingresa tu CONTRASEÑA" class="login__input" name="password">
 
                     <input type="submit" value="Crear Cuenta" class="login__submit">
                 </fieldset>
@@ -100,8 +84,6 @@ $errores = [];
             </div>
 
         </div>
-
-        <img class="login--imagen " src="/build/img/image2.png" alt="">
     </section>
 
 </body>
@@ -110,7 +92,6 @@ $errores = [];
 
 
 <?php
-require "includes/funciones.php";
-incluirTemplate("footer");
 
+incluirTemplate("footer");
 ?>

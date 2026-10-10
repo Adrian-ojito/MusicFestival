@@ -1,6 +1,10 @@
 <?php
-session_start();
-$resultado = $_GET["resultado"] ?? "<li class='navegacion-enlace'><a href='login.php'>Sing in</a></li>";
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
+$resultado = "<li class='navegacion-enlace'><a href='login.php'>Iniciar sesión</a></li>";
+
 if (!empty($_SESSION["login"])) {
     $resultado = "<li class='navegacion-enlace perfil'><span class='material-symbols-outlined'>
 account_box</span>

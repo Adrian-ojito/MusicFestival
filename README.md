@@ -24,7 +24,7 @@ Tablas principales:
 
 - **eventos** — id_evento, nombre, lugar, fecha_evento, precio, entradas_disponibles
 - **compras** — id_compra, id_evento, id_usuario, nombre_asistente, dni_asistente, email_asistente, telefono_asistente, cantidad, total, fecha_compra
-- **usuarios** — id_usuario, nombre, contraseña_hash, rol, fecha_registro
+- **usuarios** — id_usuario, nombre, contrasena_hash, rol, fecha_registro
 
 El script de creación está en `music_festival.sql`.
 
